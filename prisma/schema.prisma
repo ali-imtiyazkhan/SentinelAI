@@ -13,3 +13,36 @@ model User {
   email    String @unique()
   password String
 }
+
+model RequestLog {
+  id        String   @id @default(cuid())
+  ip        String
+  endpoint  String
+  method    String
+  riskScore Int
+  decision  Decision
+  createdAt DateTime @default(now())
+
+  @@index([ip])
+  @@index([createdAt])
+}
+
+model TrustProfile {
+  id         String   @id @default(cuid())
+  ip         String   @unique
+  trustScore Float    @default(0.8)
+  updatedAt  DateTime @updatedAt
+}
+
+model BlockedIP {
+  id        String    @id @default(cuid())
+  ip        String    @unique
+  reason    String
+  blockedAt DateTime  @default(now())
+  expiresAt DateTime?
+}
+
+enum Decision {
+  ALLOW
+  BLOCK
+}

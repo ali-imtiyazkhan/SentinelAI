@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.3.0",
   "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"./generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id       String @id @default(uuid())\n  name     String\n  email    String @unique()\n  password String\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"./generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id       String @id @default(uuid())\n  name     String\n  email    String @unique()\n  password String\n}\n\nmodel RequestLog {\n  id        String   @id @default(cuid())\n  ip        String\n  endpoint  String\n  method    String\n  riskScore Int\n  decision  Decision\n  createdAt DateTime @default(now())\n\n  @@index([ip])\n  @@index([createdAt])\n}\n\nmodel TrustProfile {\n  id         String   @id @default(cuid())\n  ip         String   @unique\n  trustScore Float    @default(0.8)\n  updatedAt  DateTime @updatedAt\n}\n\nmodel BlockedIP {\n  id        String    @id @default(cuid())\n  ip        String    @unique\n  reason    String\n  blockedAt DateTime  @default(now())\n  expiresAt DateTime?\n}\n\nenum Decision {\n  ALLOW\n  BLOCK\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"RequestLog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"ip\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"endpoint\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"method\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"riskScore\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"decision\",\"kind\":\"enum\",\"type\":\"Decision\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"TrustProfile\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"ip\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"trustScore\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"BlockedIP\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"ip\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reason\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"blockedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -185,6 +185,36 @@ export interface PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.requestLog`: Exposes CRUD operations for the **RequestLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RequestLogs
+    * const requestLogs = await prisma.requestLog.findMany()
+    * ```
+    */
+  get requestLog(): Prisma.RequestLogDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.trustProfile`: Exposes CRUD operations for the **TrustProfile** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TrustProfiles
+    * const trustProfiles = await prisma.trustProfile.findMany()
+    * ```
+    */
+  get trustProfile(): Prisma.TrustProfileDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.blockedIP`: Exposes CRUD operations for the **BlockedIP** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BlockedIPS
+    * const blockedIPS = await prisma.blockedIP.findMany()
+    * ```
+    */
+  get blockedIP(): Prisma.BlockedIPDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

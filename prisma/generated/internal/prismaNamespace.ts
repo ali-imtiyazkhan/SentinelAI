@@ -384,7 +384,10 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  User: 'User'
+  User: 'User',
+  RequestLog: 'RequestLog',
+  TrustProfile: 'TrustProfile',
+  BlockedIP: 'BlockedIP'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -400,7 +403,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user"
+    modelProps: "user" | "requestLog" | "trustProfile" | "blockedIP"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -478,6 +481,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RequestLog: {
+      payload: Prisma.$RequestLogPayload<ExtArgs>
+      fields: Prisma.RequestLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RequestLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RequestLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RequestLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RequestLogPayload>
+        }
+        findFirst: {
+          args: Prisma.RequestLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RequestLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RequestLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RequestLogPayload>
+        }
+        findMany: {
+          args: Prisma.RequestLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RequestLogPayload>[]
+        }
+        create: {
+          args: Prisma.RequestLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RequestLogPayload>
+        }
+        createMany: {
+          args: Prisma.RequestLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RequestLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RequestLogPayload>[]
+        }
+        delete: {
+          args: Prisma.RequestLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RequestLogPayload>
+        }
+        update: {
+          args: Prisma.RequestLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RequestLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.RequestLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RequestLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RequestLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RequestLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.RequestLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RequestLogPayload>
+        }
+        aggregate: {
+          args: Prisma.RequestLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRequestLog>
+        }
+        groupBy: {
+          args: Prisma.RequestLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RequestLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RequestLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RequestLogCountAggregateOutputType> | number
+        }
+      }
+    }
+    TrustProfile: {
+      payload: Prisma.$TrustProfilePayload<ExtArgs>
+      fields: Prisma.TrustProfileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TrustProfileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustProfilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TrustProfileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustProfilePayload>
+        }
+        findFirst: {
+          args: Prisma.TrustProfileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustProfilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TrustProfileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustProfilePayload>
+        }
+        findMany: {
+          args: Prisma.TrustProfileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustProfilePayload>[]
+        }
+        create: {
+          args: Prisma.TrustProfileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustProfilePayload>
+        }
+        createMany: {
+          args: Prisma.TrustProfileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TrustProfileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustProfilePayload>[]
+        }
+        delete: {
+          args: Prisma.TrustProfileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustProfilePayload>
+        }
+        update: {
+          args: Prisma.TrustProfileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustProfilePayload>
+        }
+        deleteMany: {
+          args: Prisma.TrustProfileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TrustProfileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TrustProfileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustProfilePayload>[]
+        }
+        upsert: {
+          args: Prisma.TrustProfileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustProfilePayload>
+        }
+        aggregate: {
+          args: Prisma.TrustProfileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTrustProfile>
+        }
+        groupBy: {
+          args: Prisma.TrustProfileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TrustProfileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TrustProfileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TrustProfileCountAggregateOutputType> | number
+        }
+      }
+    }
+    BlockedIP: {
+      payload: Prisma.$BlockedIPPayload<ExtArgs>
+      fields: Prisma.BlockedIPFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BlockedIPFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BlockedIPPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BlockedIPFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BlockedIPPayload>
+        }
+        findFirst: {
+          args: Prisma.BlockedIPFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BlockedIPPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BlockedIPFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BlockedIPPayload>
+        }
+        findMany: {
+          args: Prisma.BlockedIPFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BlockedIPPayload>[]
+        }
+        create: {
+          args: Prisma.BlockedIPCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BlockedIPPayload>
+        }
+        createMany: {
+          args: Prisma.BlockedIPCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BlockedIPCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BlockedIPPayload>[]
+        }
+        delete: {
+          args: Prisma.BlockedIPDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BlockedIPPayload>
+        }
+        update: {
+          args: Prisma.BlockedIPUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BlockedIPPayload>
+        }
+        deleteMany: {
+          args: Prisma.BlockedIPDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BlockedIPUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BlockedIPUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BlockedIPPayload>[]
+        }
+        upsert: {
+          args: Prisma.BlockedIPUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BlockedIPPayload>
+        }
+        aggregate: {
+          args: Prisma.BlockedIPAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBlockedIP>
+        }
+        groupBy: {
+          args: Prisma.BlockedIPGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BlockedIPGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BlockedIPCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BlockedIPCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -527,6 +752,40 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const RequestLogScalarFieldEnum = {
+  id: 'id',
+  ip: 'ip',
+  endpoint: 'endpoint',
+  method: 'method',
+  riskScore: 'riskScore',
+  decision: 'decision',
+  createdAt: 'createdAt'
+} as const
+
+export type RequestLogScalarFieldEnum = (typeof RequestLogScalarFieldEnum)[keyof typeof RequestLogScalarFieldEnum]
+
+
+export const TrustProfileScalarFieldEnum = {
+  id: 'id',
+  ip: 'ip',
+  trustScore: 'trustScore',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TrustProfileScalarFieldEnum = (typeof TrustProfileScalarFieldEnum)[keyof typeof TrustProfileScalarFieldEnum]
+
+
+export const BlockedIPScalarFieldEnum = {
+  id: 'id',
+  ip: 'ip',
+  reason: 'reason',
+  blockedAt: 'blockedAt',
+  expiresAt: 'expiresAt'
+} as const
+
+export type BlockedIPScalarFieldEnum = (typeof BlockedIPScalarFieldEnum)[keyof typeof BlockedIPScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -541,6 +800,14 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 
@@ -574,6 +841,48 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Decision'
+ */
+export type EnumDecisionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decision'>
+    
+
+
+/**
+ * Reference to a field of type 'Decision[]'
+ */
+export type ListEnumDecisionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decision[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime[]'
+ */
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -672,6 +981,9 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  requestLog?: Prisma.RequestLogOmit
+  trustProfile?: Prisma.TrustProfileOmit
+  blockedIP?: Prisma.BlockedIPOmit
 }
 
 /* Types for Logging */

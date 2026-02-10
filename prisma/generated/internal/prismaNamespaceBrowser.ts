@@ -51,7 +51,10 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  User: 'User'
+  User: 'User',
+  RequestLog: 'RequestLog',
+  TrustProfile: 'TrustProfile',
+  BlockedIP: 'BlockedIP'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -80,6 +83,40 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const RequestLogScalarFieldEnum = {
+  id: 'id',
+  ip: 'ip',
+  endpoint: 'endpoint',
+  method: 'method',
+  riskScore: 'riskScore',
+  decision: 'decision',
+  createdAt: 'createdAt'
+} as const
+
+export type RequestLogScalarFieldEnum = (typeof RequestLogScalarFieldEnum)[keyof typeof RequestLogScalarFieldEnum]
+
+
+export const TrustProfileScalarFieldEnum = {
+  id: 'id',
+  ip: 'ip',
+  trustScore: 'trustScore',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TrustProfileScalarFieldEnum = (typeof TrustProfileScalarFieldEnum)[keyof typeof TrustProfileScalarFieldEnum]
+
+
+export const BlockedIPScalarFieldEnum = {
+  id: 'id',
+  ip: 'ip',
+  reason: 'reason',
+  blockedAt: 'blockedAt',
+  expiresAt: 'expiresAt'
+} as const
+
+export type BlockedIPScalarFieldEnum = (typeof BlockedIPScalarFieldEnum)[keyof typeof BlockedIPScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -94,4 +131,12 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

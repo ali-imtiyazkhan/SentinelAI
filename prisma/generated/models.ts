@@ -9,4 +9,7 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User'
+export type * from './models/RequestLog'
+export type * from './models/TrustProfile'
+export type * from './models/BlockedIP'
 export type * from './commonInputTypes'

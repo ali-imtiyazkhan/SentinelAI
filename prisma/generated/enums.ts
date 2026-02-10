@@ -9,7 +9,9 @@
 * 🟢 You can import this file directly.
 */
 
+export const Decision = {
+  ALLOW: 'ALLOW',
+  BLOCK: 'BLOCK'
+} as const
 
-
-// This file is empty because there are no enums in the schema.
-export {}
+export type Decision = (typeof Decision)[keyof typeof Decision]

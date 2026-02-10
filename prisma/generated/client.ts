@@ -44,3 +44,18 @@ export { Prisma }
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model RequestLog
+ * 
+ */
+export type RequestLog = Prisma.RequestLogModel
+/**
+ * Model TrustProfile
+ * 
+ */
+export type TrustProfile = Prisma.TrustProfileModel
+/**
+ * Model BlockedIP
+ * 
+ */
+export type BlockedIP = Prisma.BlockedIPModel
