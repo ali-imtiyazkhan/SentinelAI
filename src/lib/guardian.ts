@@ -9,16 +9,16 @@ type GuardianInput = {
 };
 
 export async function guardian({ ip, endpoint, method }: GuardianInput) {
-  // 1 Check if blocked
+  // 1️⃣ Check if blocked
   const blocked = await prisma.blockedIP.findUnique({
     where: { ip },
   });
 
-  if (blocked) {
-    return { decision: "BLOCK", reason: "Already blocked" };
+  if (blocked && (!blocked.expiresAt || blocked.expiresAt > new Date())) {
+    return { decision: "BLOCK" };
   }
 
-  // 2 Count recent requests
+  // 2️⃣ Count recent requests
   const recentCount = await prisma.requestLog.count({
     where: {
       ip,
@@ -28,7 +28,7 @@ export async function guardian({ ip, endpoint, method }: GuardianInput) {
     },
   });
 
-  // 3 Get or create trust profile
+  // 3️⃣ Get trust profile
   let trustProfile = await prisma.trustProfile.findUnique({
     where: { ip },
   });
@@ -42,7 +42,7 @@ export async function guardian({ ip, endpoint, method }: GuardianInput) {
     });
   }
 
-  // 4 Calculate risk
+  // 4️⃣ Calculate risk
   const riskScore = calculateRisk({
     ip,
     endpoint,
@@ -51,10 +51,11 @@ export async function guardian({ ip, endpoint, method }: GuardianInput) {
     trustScore: trustProfile.trustScore,
   });
 
-  // 5 Adjust trust
+  // 5️⃣ Adjust trust
   const newTrust = adjustTrust({
     currentTrust: trustProfile.trustScore,
     riskScore,
+    lastUpdated: trustProfile.updatedAt,
   });
 
   await prisma.trustProfile.update({
@@ -64,7 +65,7 @@ export async function guardian({ ip, endpoint, method }: GuardianInput) {
 
   const decision = riskScore > 80 ? "BLOCK" : "ALLOW";
 
-  // 6 Log request
+  // 6️⃣ Log request
   await prisma.requestLog.create({
     data: {
       ip,
@@ -74,16 +75,6 @@ export async function guardian({ ip, endpoint, method }: GuardianInput) {
       decision,
     },
   });
-
-  // 7 Auto block
-  if (decision === "BLOCK") {
-    await prisma.blockedIP.create({
-      data: {
-        ip,
-        reason: "High risk detected",
-      },
-    });
-  }
 
   return {
     decision,
